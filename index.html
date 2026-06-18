@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="작곡가를 위한 시네마틱 화성 진행 추천 프로그램. 곡의 분위기와 화성학 규칙에 맞는 최적의 코드 진행을 제안합니다.">
+  <title>monopo saigon — harmonic interlude</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Top Navigation Bar -->
+  <nav id="main-nav" class="top-nav">
+    <div class="logo">monopo saigon</div>
+    <div class="nav-links">
+      <div style="display: flex; gap: 8px; border-right: 1px solid currentColor; padding-right: 16px; margin-right: 8px;">
+        <span class="ghost-link" style="opacity: 0.5;">EN</span>
+        <span class="ghost-link" style="opacity: 0.5;">中文</span>
+        <span class="ghost-link" style="font-weight: 600;">한국어</span>
+      </div>
+      <button class="ghost-link">Work</button>
+      <button class="ghost-link">Manifesto</button>
+      <button class="ghost-link">Team</button>
+      <button class="ghost-link" id="explore-trigger">Explore</button>
+    </div>
+  </nav>
+
+  <!-- Hero Section (Immersive Darkroom Section) -->
+  <header class="immersive-section">
+    <div class="hero-container">
+      <h1 class="hero-title">Harmonic<br>Interlude</h1>
+      <p class="hero-subtitle">
+        창작의 벽을 허물어줄 화성 진행 추천기.<br>
+        코드와 분위기에 어울리는 감각적인 흐름을 발견해 보세요.
+      </p>
+      <div>
+        <button class="btn-pill btn-pill-large btn-pill-primary" id="explore-btn" onclick="document.getElementById('editorial-content').scrollIntoView({ behavior: 'smooth' })">
+          Start Exploring
+        </button>
+      </div>
+    </div>
+
+    <!-- Scroll Indicator at Bottom-Left -->
+    <div class="scroll-indicator">
+      <svg width="12" height="18" viewBox="0 0 12 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M6 1V17M6 17L1 12M6 17L11 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <span>Scroll to Explore</span>
+    </div>
+  </header>
+
+  <!-- Editorial Content Section (White Architecture) -->
+  <main id="editorial-content" class="editorial-section">
+    <div class="container">
+      
+      <h2 class="section-headline">Select &amp; Create</h2>
+      <p class="section-intro">
+        곡의 조성과 시작코드, 분위기를 입력하세요.<br>
+        순수음악이론규칙 알고리즘이 음악적인 화성 구조를 제안합니다.
+      </p>
+
+      <div class="layout-split">
+        
+        <!-- Left Panel: Controls Sidebar -->
+        <aside class="control-sidebar">
+          
+          <!-- Key Selection -->
+          <div class="control-group">
+            <span class="control-label">01. Choose Key</span>
+            <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 8px;">
+              <div class="select-wrapper">
+                <select id="key-root-select" class="custom-select" aria-label="Key Root Note">
+                  <option value="C">C</option>
+                  <option value="C#">C# / Db</option>
+                  <option value="D">D</option>
+                  <option value="Eb">Eb</option>
+                  <option value="E">E</option>
+                  <option value="F">F</option>
+                  <option value="F#">F# / Gb</option>
+                  <option value="G">G</option>
+                  <option value="Ab">Ab</option>
+                  <option value="A">A</option>
+                  <option value="Bb">Bb</option>
+                  <option value="B">B</option>
+                </select>
+              </div>
+              <div class="select-wrapper">
+                <select id="key-type-select" class="custom-select" aria-label="Key Type">
+                  <option value="major" selected>Major</option>
+                  <option value="minor">minor</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <!-- Starting Chord Selection -->
+          <div class="control-group">
+            <span class="control-label">02. Starting Chord</span>
+            <div class="select-wrapper">
+              <select id="start-chord-select" class="custom-select" aria-label="Starting Chord Degree">
+                <!-- Populated dynamically by JS -->
+              </select>
+            </div>
+          </div>
+
+          <!-- Mood / Scale quality Filter -->
+          <div class="control-group">
+            <span class="control-label">03. Mood &amp; Quality</span>
+            <div class="mood-selector">
+              <button class="btn-option active" data-mood="bright" id="mood-btn-bright">
+                <strong>Bright &amp; Stable</strong>
+                <span class="desc">Major-based stable progressions</span>
+              </button>
+              <button class="btn-option" data-mood="dark" id="mood-btn-dark">
+                <strong>Dark &amp; Melancholy</strong>
+                <span class="desc">minor-based / Modal Interchange</span>
+              </button>
+              <button class="btn-option" data-mood="tense" id="mood-btn-tense">
+                <strong>Tense &amp; Suspense</strong>
+                <span class="desc">Diminished, Augmented, vii°</span>
+              </button>
+              <button class="btn-option" data-mood="jazz" id="mood-btn-jazz">
+                <strong>Jazz &amp; Pop Color</strong>
+                <span class="desc">7th chords and 9th extensions</span>
+              </button>
+            </div>
+          </div>
+
+        </aside>
+
+        <!-- Right Panel: Suggestions Results -->
+        <section class="results-panel">
+          <div class="results-header">
+            <h3 class="results-title" id="results-heading">Recommended Progressions</h3>
+            <span class="results-count" id="results-count-display">0 progressions generated</span>
+          </div>
+
+          <!-- Progression cards container -->
+          <div id="progression-list-container" class="progression-list">
+            <!-- Populated dynamically by JS -->
+          </div>
+        </section>
+
+      </div>
+    </div>
+  </main>
+
+  <!-- Virtual Keyboard Section (Immersive Dark Break) -->
+  <section class="keyboard-section">
+    <div class="container">
+      <div class="keyboard-container">
+        
+        <div class="keyboard-header">
+          <h2 class="keyboard-title">Visual Voicing Keyboard</h2>
+          <span class="keyboard-subtitle">Click chord blocks to view their voicings on the piano.</span>
+        </div>
+
+        <div class="piano-wrapper">
+          <div class="piano-keyboard" id="piano-keyboard-container">
+            <!-- Populated dynamically by JS -->
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Global Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-inner">
+        <div>© 2026 monopo saigon. All rights reserved. Built for creators.</div>
+        <div style="display: flex; gap: 24px;">
+          <a href="#" class="ghost-link" style="opacity: 0.5; padding: 0;">Privacy Policy</a>
+          <a href="#" class="ghost-link" style="opacity: 0.5; padding: 0;">Terms of Service</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Toast Container for messages -->
+  <div id="toast-container" class="toast-container"></div>
+
+  <!-- GDPR Cookie Consent Overlay -->
+  <div id="cookie-consent-banner" class="cookie-banner">
+    <div class="cookie-text">
+      We use cookies to enhance your experience. By continuing to explore, you agree to our <a href="#">privacy policy</a>.
+    </div>
+    <div style="display: flex; align-items: center; gap: 12px; margin-left: auto;">
+      <button class="btn-pill btn-pill-small btn-pill-utility" id="cookie-accept-btn">Accept</button>
+      <button class="toast-close" onclick="document.getElementById('cookie-consent-banner').classList.remove('show')" aria-label="Dismiss cookie banner" style="padding: 0 4px;">×</button>
+    </div>
+  </div>
+
+  <!-- Audio Loading overlay -->
+  <div id="audio-loader" class="loading-overlay">
+    <div class="loader-spinner"></div>
+    <div class="loader-text">Loading Synthesizer...</div>
+  </div>
+
+  <script src="main.js"></script>
+</body>
+</html>
